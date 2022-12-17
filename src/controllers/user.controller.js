@@ -27,10 +27,10 @@ module.exports.getUsersWithPostCount = async (req, res) => {
         $unwind: "$user",
       },
       {
-        $limit: Number(limit),
+        $limit: 10 || Number(limit),
       },
       {
-        $skip: Number(skip),
+        $skip: 1 || Number(skip),
       },
       {
         $project: {
@@ -41,19 +41,9 @@ module.exports.getUsersWithPostCount = async (req, res) => {
       },
     ]);
 
-    // const page = req.query.page * 1 || 1;
-    // const limit = req.query.limit * 1 || 100;
-
-    // const skip = (page - 1) * limit;
-
-    // query = query.skip(skip).limit(limit);
-
-    console.log(`skip ${skip} limit ${limit}`);
-
     res.status(200).json({
-      status: "success",
-      users: {
-        post,
+      data: {
+        users: post,
       },
       message: "Implement this API",
     });
