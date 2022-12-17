@@ -1,5 +1,8 @@
 const express = require("express");
-const { getUsersWithPostCount } = require("./controllers/user.controller");
+const {
+  getUsersWithPostCount,
+  getUsersPagination,
+} = require("./controllers/user.controller");
 
 const app = express();
 
@@ -8,5 +11,6 @@ app.get("/", (req, res) => {
 });
 
 app.get("/users", getUsersWithPostCount);
+app.get("/users?", getUsersPagination);
 
 module.exports = app;
